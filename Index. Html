@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MathMind India</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #08111f;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background: #142846;
+  text-align: center;
+  padding: 22px 10px;
+}
+
+header h1 {
+  color: #3de0b0;
+  margin: 0;
+}
+
+header p {
+  color: #c5d4e8;
+}
+
+nav {
+  display: flex;
+  gap: 6px;
+  padding: 10px;
+  overflow-x: auto;
+  background: #0d192b;
+}
+
+nav button {
+  padding: 10px;
+  background: #17263b;
+  color: white;
+  border: 1px solid #405675;
+  border-radius: 8px;
+  white-space: nowrap;
+}
+
+main {
+  max-width: 900px;
+  margin: auto;
+  padding: 14px;
+}
+
+section {
+  display: none;
+}
+
+section.active {
+  display: block;
+}
+
+.card {
+  background: #132239;
+  padding: 16px;
+  margin: 12px 0;
+  border-radius: 12px;
+}
+
+h2 {
+  color: #3de0b0;
+}
+
+.action {
+  background: #3de0b0;
+  color: #08111f;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>✦ MathMind India</h1>
+<p>Mathematical Modelling & Computational Thinking</p>
+<p>Mathematics Exhibition 2026–27</p>
+<strong>Created by Kartik | Class 9</strong>
+</header>
+
+<nav>
+<button onclick="showPage('home')">🏠 Home</button>
+<button onclick="showPage('fuel')">⛽ SmartFuel</button>
+<button onclick="showPage('compare')">📊 Compare</button>
+<button onclick="showPage('calculator')">🧮 Calculator</button>
+<button onclick="showPage('water')">💧 Water</button>
+<button onclick="showPage('about')">🧠 About</button>
+</nav>
+
+<main><section id="home" class="active">
+
+<div class="card">
+<h2>Welcome to MathMind India! 🚀</h2>
+
+<p>
+Discover how mathematics helps us understand
+real-life problems through data, calculations
+and comparisons.
+</p>
+
+<button class="action" onclick="showPage('fuel')">
+Explore Fuel Data →
+</button>
+</div>
+
+<div class="card">
+<h2>📊 Project Dashboard</h2>
+
+<p>Total Cities</p>
+<h3 id="cityCount">6</h3>
+
+<p>Average Petrol Price</p>
+<h3 id="homeAvg">₹0.00</h3>
+
+<p>Highest Petrol Price</p>
+<h3 id="homeHigh">₹0.00</h3>
+</div>
+
+<div class="card">
+<h2>🎯 Project Objectives</h2>
+
+<p>✅ Organise numerical data.</p>
+
+<p>✅ Calculate averages and percentages.</p>
+
+<p>✅ Compare fuel prices across cities.</p>
+
+<p>✅ Display information through graphs.</p>
+
+<p>✅ Apply mathematical modelling to daily life.</p>
+</div>
+
+<div class="card">
+<h2>💡 Did You Know?</h2>
+
+<p>
+Mathematics helps us compare prices,
+manage household resources and make
+better everyday decisions.
+</p>
+</div>
+
+</section><section id="fuel">
+
+<div class="card">
+<h2>⛽ SmartFuel India</h2>
+
+<p>Compare petrol and diesel prices in different cities.</p>
+
+<p class="muted">
+Note: These are sample prices for mathematical
+demonstration, not verified current prices.
+</p>
+</div>
+
+<div class="card">
+<h2>Fuel Price Data</h2>
+
+<div class="tablewrap">
+<table>
+<thead>
+<tr>
+<th>City</th>
+<th>Petrol ₹/L</th>
+<th>Diesel ₹/L</th>
+</tr>
+</thead>
+
+<tbody id="fuelTable"></tbody>
+</table>
+</div>
+
+<button class="action" onclick="updateData()">
+Update Data
+</button>
+
+<button class="action" onclick="resetData()">
+Reset Data
+</button>
+
+<button class="action" onclick="downloadCSV()">
+Download CSV
+</button>
+
+<div id="fuelMessage" class="result">
+Edit prices and tap Update Data.
+</div>
+</div>
+
+<div class="card">
+<h2>📈 Fuel Statistics</h2>
+
+<p>Average Petrol Price</p>
+<h3 id="avgPetrol">₹0.00</h3>
+
+<p>Average Diesel Price</p>
+<h3 id="avgDiesel">₹0.00</h3>
+
+<p>Petrol Price Range</p>
+<h3 id="rangePetrol">₹0.00</h3>
+</div>
+
+<div class="card">
+<h2>📊 Petrol Price Graph</h2>
+
+<canvas id="chart" width="700" height="300"></canvas>
+</div>
+
+</section><section id="compare">
+
+<div class="card">
+<h2>📊 City Comparison</h2>
+<p>Compare fuel prices between two cities.</p>
+
+<label>First City</label>
+<select id="cityA"></select>
+
+<label>Second City</label>
+<select id="cityB"></select>
+
+<button class="action" onclick="compareCities()">
+Compare Now
+</button>
+
+<div id="compareResult" class="result">
+Choose two cities to compare.
+</div>
+</div>
+
+<div class="card">
+<h2>🧠 Mathematical Formula</h2>
+<p>Difference = Higher Price − Lower Price</p>
+<p>Percentage = (Difference ÷ First Price) × 100</p>
+</div>
+
+</section><section id="calculator">
+
+<div class="card">
+<h2>🧮 Maths Calculator</h2>
+<p>Calculate everyday mathematical problems.</p>
+</div>
+
+<div class="card">
+<h2>⛽ Fuel Cost Calculator</h2>
+
+<label>Price per litre (₹)</label>
+<input id="price" type="number" placeholder="95">
+
+<label>Quantity in litres</label>
+<input id="quantity" type="number" placeholder="5">
+
+<button class="action" onclick="fuelCost()">
+Calculate Cost
+</button>
+
+<div id="costResult" class="result">
+Your answer will appear here.
+</div>
+</div>
+
+<div class="card">
+<h2>📐 Average Calculator</h2>
+
+<label>Enter numbers separated by commas</label>
+<input id="numbers" placeholder="10,20,30,40">
+
+<button class="action" onclick="averageCalc()">
+Calculate Average
+</button>
+
+<div id="averageResult" class="result">
+Your answer will appear here.
+</div>
+</div>
+
+</section><section id="water">
+
+<div class="card">
+<h2>💧 Water Usage Calculator</h2>
+
+<p>Calculate daily and monthly household water usage.</p>
+
+<label>Daily Water Usage (Litres)</label>
+<input id="daily" type="number" placeholder="120">
+
+<label>Number of People</label>
+<input id="people" type="number" value="4" min="1">
+
+<button class="action" onclick="waterCalc()">
+Calculate Usage
+</button>
+
+<div id="waterResult" class="result">
+Your answer will appear here.
+</div>
+
+</div>
+
+<div class="card">
+<h2>📘 Mathematical Formula</h2>
+
+<p>Monthly Usage = Daily Usage × 30</p>
+
+<p>Per Person Usage = Daily Usage ÷ People</p>
+</div>
+
+</section><section id="about">
+
+<div class="card">
+<h2>🧠 About MathMind India</h2>
+
+<p><strong>Project Name:</strong> MathMind India</p>
+
+<p><strong>Created By:</strong> Kartik</p>
+
+<p><strong>Class:</strong> 9</p>
+
+<p><strong>Academic Year:</strong> 2026–27</p>
+
+<p><strong>Subject:</strong> Mathematics</p>
+
+<h2>🎯 Aim</h2>
+
+<p>
+To demonstrate how mathematics helps us organise
+data, compare values and solve real-life problems.
+</p>
+
+<h2>📐 Mathematical Formulas</h2>
+
+<p>Average = Sum of Values ÷ Number of Values</p>
+
+<p>Total Cost = Price × Quantity</p>
+
+<p>Percentage = (Difference ÷ Original Value) × 100</p>
+
+<h2>💡 Conclusion</h2>
+
+<p>
+Mathematical modelling helps turn numerical data
+into useful information. Computational thinking
+helps us organise the steps needed to solve a problem.
+</p>
+
+</div>
+
+</section>
+
+<footer>
+✦ MathMind India<br>
+Created by Kartik | Class 9<br>
+Mathematics Exhibition 2026–27
+</footer><script>
+const initialData = [
+  {city:"Delhi", petrol:95, diesel:88},
+  {city:"Mumbai", petrol:105, diesel:92},
+  {city:"Jaipur", petrol:104, diesel:90},
+  {city:"Lucknow", petrol:95, diesel:88},
+  {city:"Chennai", petrol:101, diesel:93},
+  {city:"Kolkata", petrol:105, diesel:92}
+];
+
+let data = initialData.map(x => ({...x}));
+
+function showPage(id) {
+  document.querySelectorAll("main section").forEach(s => {
+    s.classList.toggle("active", s.id === id);
+  });
+}
+
+function avg(arr) {
+  return arr.reduce((a,b) => a+b, 0) / arr.length;
+}
+
+function rupee(n) {
+  return "₹" + n.toFixed(2);
+}
+
+function renderTable() {
+  document.getElementById("fuelTable").innerHTML =
+    data.map((x,i) => `
+      <tr>
+        <td>${x.city}</td>
+        <td><input type="number" min="0" step="any"
+          data-i="${i}" data-k="petrol" value="${x.petrol}"></td>
+        <td><input type="number" min="0" step="any"
+          data-i="${i}" data-k="diesel" value="${x.diesel}"></td>
+      </tr>
+    `).join("");
+}
+
+function renderCities() {
+  const html = data.map((x,i) =>
+    `<option value="${i}">${x.city}</option>`
+  ).join("");
+
+  document.getElementById("cityA").innerHTML = html;
+  document.getElementById("cityB").innerHTML = html;
+
+  if (data.length > 1) {
+    document.getElementById("cityB").selectedIndex = 1;
+  }
+}function refresh() {
+  const p = data.map(x => x.petrol);
+  const d = data.map(x => x.diesel);
+
+  document.getElementById("cityCount").textContent = data.length;
+  document.getElementById("homeAvg").textContent = rupee(avg(p));
+  document.getElementById("homeHigh").textContent = rupee(Math.max(...p));
+
+  document.getElementById("avgPetrol").textContent = rupee(avg(p));
+  document.getElementById("avgDiesel").textContent = rupee(avg(d));
+  document.getElementById("rangePetrol").textContent =
+    rupee(Math.max(...p) - Math.min(...p));
+
+  renderTable();
+  renderCities();
+  drawChart();
+}
+
+function updateData() {
+  const inputs = document.querySelectorAll("#fuelTable input");
+  const next = data.map(x => ({...x}));
+
+  for (const input of inputs) {
+    if (input.value.trim() === "" ||
+        !Number.isFinite(Number(input.value)) ||
+        Number(input.value) < 0) {
+      alert("Enter valid prices.");
+      return;
+    }
+
+    next[Number(input.dataset.i)][input.dataset.k] =
+      Number(input.value);
+  }
+
+  data = next;
+  refresh();
+
+  document.getElementById("fuelMessage").textContent =
+    "Data updated successfully!";
+}
+
+function resetData() {
+  data = initialData.map(x => ({...x}));
+  refresh();
+
+  document.getElementById("fuelMessage").textContent =
+    "Demo prices restored.";
+}
+
+function compareCities() {
+  const a = data[Number(document.getElementById("cityA").value)];
+  const b = data[Number(document.getElementById("cityB").value)];
+
+  if (!a || !b) return;
+
+  document.getElementById("compareResult").textContent =
+    a.city + " vs " + b.city +
+    " | Petrol difference: " + rupee(Math.abs(a.petrol-b.petrol)) +
+    " | Diesel difference: " + rupee(Math.abs(a.diesel-b.diesel));
+}
+
+function fuelCost() {
+  const p = Number(document.getElementById("price").value);
+  const q = Number(document.getElementById("quantity").value);
+
+  if (document.getElementById("price").value === "" ||
+      document.getElementById("quantity").value === "" ||
+      !Number.isFinite(p) || !Number.isFinite(q) || p < 0 || q < 0) {
+    document.getElementById("costResult").textContent =
+      "Enter valid non-negative numbers.";
+    return;
+  }
+
+  document.getElementById("costResult").textContent =
+    "Total Fuel Cost = " + rupee(p*q);
+}
+
+function averageCalc() {
+  const s = document.getElementById("numbers").value.trim();
+  const r = document.getElementById("averageResult");
+
+  if (!s) {
+    r.textContent = "Enter numbers separated by commas.";
+    return;
+  }
+
+  const a = s.split(",").map(x => x.trim());
+
+  if (a.some(x => x === "" || !Number.isFinite(Number(x)))) {
+    r.textContent = "Invalid numbers. Example: 10,20,30";
+    return;
+  }
+
+  const nums = a.map(Number);
+  r.textContent = "Average = " + avg(nums).toFixed(2);
+}function waterCalc() {
+  const daily = Number(document.getElementById("daily").value);
+  const people = Number(document.getElementById("people").value);
+  const result = document.getElementById("waterResult");
+
+  if (
+    document.getElementById("daily").value === "" ||
+    document.getElementById("people").value === "" ||
+    !Number.isFinite(daily) ||
+    !Number.isInteger(people) ||
+    daily < 0 ||
+    people < 1
+  ) {
+    result.textContent = "Enter valid water usage and number of people.";
+    return;
+  }
+
+  result.innerHTML =
+    "Daily Usage: <b>" + daily + " litres</b><br>" +
+    "Monthly Usage: <b>" + (daily * 30) + " litres</b><br>" +
+    "Per Person Daily: <b>" + (daily / people).toFixed(2) + " litres</b>";
+}
+
+function drawChart() {
+  const canvas = document.getElementById("chart");
+  if (!canvas) return;
+
+  const ctx = canvas.getContext("2d");
+  const w = canvas.width;
+  const h = canvas.height;
+
+  ctx.clearRect(0, 0, w, h);
+  ctx.fillStyle = "#091626";
+  ctx.fillRect(0, 0, w, h);
+
+  const max = Math.max(1, ...data.map(x => x.petrol)) * 1.2;
+  const left = 50;
+  const bottom = 55;
+  const top = 20;
+  const chartH = h - top - bottom;
+  const chartW = w - left - 15;
+  const slot = chartW / data.length;
+  const barW = Math.min(55, slot * 0.6);
+
+  ctx.font = "12px Arial";
+  ctx.textAlign = "right";
+  ctx.fillStyle = "#ffffff";
+  ctx.strokeStyle = "#344760";
+
+  for (let i = 0; i <= 4; i++) {
+    const y = top + chartH - (chartH * i / 4);
+    const value = max * i / 4;
+
+    ctx.beginPath();
+    ctx.moveTo(left, y);
+    ctx.lineTo(w - 10, y);
+    ctx.stroke();
+
+    ctx.fillText(value.toFixed(0), left - 5, y + 4);
+  }
+
+  data.forEach((city, i) => {
+    const barH = city.petrol / max * chartH;
+    const x = left + i * slot + (slot - barW) / 2;
+    const y = top + chartH - barH;
+
+    ctx.fillStyle = "#55a7ff";
+    ctx.fillRect(x, y, barW, barH);
+
+    ctx.fillStyle = "#ffffff";
+    ctx.textAlign = "center";
+    ctx.fillText(city.petrol, x + barW / 2, y - 5);
+
+    ctx.save();
+    ctx.translate(x + barW / 2, h - 15);
+    ctx.rotate(-0.3);
+    ctx.fillText(city.city, 0, 0);
+    ctx.restore();
+  });
+}
+
+function downloadCSV() {
+  const rows = [
+    ["City", "Petrol Price", "Diesel Price"],
+    ...data.map(x => [x.city, x.petrol, x.diesel])
+  ];
+
+  const csv = rows.map(row =>
+    row.join(",")
+  ).join("\n");
+
+  const blob = new Blob(
+    ["\uFEFF" + csv],
+    { type: "text/csv;charset=utf-8;" }
+  );
+
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+
+  a.href = url;
+  a.download = "MathMind_India_Fuel_Data.csv";
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+document.querySelectorAll("nav button").forEach(button => {
+  button.addEventListener("click", () => {
+    document.querySelectorAll("nav button").forEach(b => {
+      b.classList.toggle("active", b === button);
+    });
+  });
+});
+
+refresh();
+showPage("home");
+
+</script>
+</body>
+</html>
