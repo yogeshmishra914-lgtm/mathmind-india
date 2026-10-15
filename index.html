@@ -333,5 +333,60 @@ setTimeout(()=>URL.revokeObjectURL(url),1000);
 
 refresh();
 </script>
+<style>
+#learn{background:#142b50;color:white;padding:15px;border-radius:15px;margin:15px 0;font-family:Arial}
+#learn h2{color:#ffd166}
+#learn input{padding:10px;width:90%;margin:5px 0}
+#learn button{padding:10px;background:#ffd166;border:0;border-radius:6px}
+</style>
+
+<div id="learn">
+<h2>📘 MathMind Learning Corner</h2>
+
+<h3>1. Maths Formulas</h3>
+<p>Fuel Cost = Price × Litres</p>
+<p>Average = Sum of Values ÷ Number of Values</p>
+<p>Percentage Change = (Change ÷ Original Value) × 100</p>
+
+<h3>2. Percentage Calculator</h3>
+<input id="oldM" type="number" placeholder="Original Value">
+<input id="newM" type="number" placeholder="New Value">
+<br>
+<button onclick="percentM()">Calculate</button>
+<p id="answerM">Your result will appear here.</p>
+
+<h3>3. Project Viva Questions</h3>
+<p><b>Q. What is Mathematical Modelling?</b><br>
+Using mathematics to solve real-life problems.</p>
+
+<p><b>Q. What is Computational Thinking?</b><br>
+Solving problems step by step using logic.</p>
+
+<p><b>Q. What is the purpose of this project?</b><br>
+To show how mathematics helps us solve everyday problems.</p>
+
+<p><b>Q. Is the fuel-price data live?</b><br>
+No. The displayed prices are illustrative sample values.</p>
+</div>
+
+<script>
+function percentM(){
+let a=document.getElementById('oldM').value;
+let b=document.getElementById('newM').value;
+let r=document.getElementById('answerM');
+if(a===''||b===''||Number(a)<0||Number(b)<0){
+r.innerText='Enter valid non-negative values.';
+return;
+}
+a=Number(a);b=Number(b);
+if(a===0){
+r.innerText='Original value must be greater than zero.';
+return;
+}
+let p=((b-a)/a)*100;
+r.innerText=p>0?'Increase: '+p.toFixed(2)+'%':
+p<0?'Decrease: '+Math.abs(p).toFixed(2)+'%':'No change: 0%';
+}
+</script>
 </body>
 </html>
