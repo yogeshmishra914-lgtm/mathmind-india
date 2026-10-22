@@ -42,7 +42,90 @@ footer{text-align:center;padding:22px;color:#64748b;line-height:1.6}
 <p>Mathematical Modelling &amp; Computational Thinking</p>
 <p>Created by Kartik | Class 9</p>
 </header>
+<!-- SMART FUEL TOOLS START -->
+<section id="smart-tools" style="background:#eaf2ff;padding:18px;border-radius:15px;margin:15px;font-family:Arial,sans-serif">
 
+<h2 style="color:#1d4ed8;text-align:center">🚀 Smart Fuel Research Lab</h2>
+
+<p style="text-align:center">Created by Kartik | Class 9</p>
+
+<div style="background:white;padding:15px;border-radius:12px;margin:12px 0">
+
+<h3>🚗 1. Smart Trip Planner</h3>
+
+<label>Distance (km)</label>
+<input id="topDistance" type="number" placeholder="Example: 100" style="width:100%;padding:10px;box-sizing:border-box">
+
+<label>Mileage (km/litre)</label>
+<input id="topMileage" type="number" placeholder="Example: 20" style="width:100%;padding:10px;box-sizing:border-box">
+
+<label>Petrol price (₹/litre)</label>
+<input id="topPrice" type="number" placeholder="Example: 95" style="width:100%;padding:10px;box-sizing:border-box">
+
+<button onclick="topTrip()" style="background:#2563eb;color:white;padding:12px;border:0;border-radius:8px;margin-top:10px">Calculate Trip Cost</button>
+
+<p id="topTripResult"></p>
+</div>
+
+<div style="background:white;padding:15px;border-radius:12px;margin:12px 0">
+
+<h3>📊 2. What-If Price Simulator</h3>
+
+<label>Old petrol price (₹)</label>
+<input id="topOld" type="number" placeholder="Old price" style="width:100%;padding:10px;box-sizing:border-box">
+
+<label>New petrol price (₹)</label>
+<input id="topNew" type="number" placeholder="New price" style="width:100%;padding:10px;box-sizing:border-box">
+
+<label>Fuel quantity (litres)</label>
+<input id="topLitres" type="number" placeholder="Example: 10" style="width:100%;padding:10px;box-sizing:border-box">
+
+<button onclick="topWhatIf()" style="background:#2563eb;color:white;padding:12px;border:0;border-radius:8px;margin-top:10px">Compare Expense</button>
+
+<p id="topWhatResult"></p>
+</div>
+
+<div style="background:white;padding:15px;border-radius:12px;margin:12px 0">
+
+<h3>🌱 3. E20 Fuel Calculator</h3>
+
+<p>E20 में मात्रा के हिसाब से 20% एथेनॉल और 80% पेट्रोल होता है।</p>
+
+<label>Total fuel quantity (litres)</label>
+<input id="topE20" type="number" placeholder="Example: 10" style="width:100%;padding:10px;box-sizing:border-box">
+
+<button onclick="topE20Calc()" style="background:#15803d;color:white;padding:12px;border:0;border-radius:8px;margin-top:10px">Calculate E20 Ratio</button>
+
+<p id="topE20Result"></p>
+</div>
+
+<div style="background:white;padding:15px;border-radius:12px;margin:12px 0">
+
+<h3>💰 4. Fuel Savings Calculator</h3>
+
+<label>Cost of Option A (₹)</label>
+<input id="topCostA" type="number" placeholder="First cost" style="width:100%;padding:10px;box-sizing:border-box">
+
+<label>Cost of Option B (₹)</label>
+<input id="topCostB" type="number" placeholder="Second cost" style="width:100%;padding:10px;box-sizing:border-box">
+
+<button onclick="topSavings()" style="background:#7c3aed;color:white;padding:12px;border:0;border-radius:8px;margin-top:10px">Compare Savings</button>
+
+<p id="topSavingsResult"></p>
+</div>
+
+<div style="background:#d1fae5;padding:12px;border-radius:10px">
+<b>📘 Mathematics Used</b>
+<p>Fuel required = Distance ÷ Mileage</p>
+<p>Trip cost = Fuel required × Fuel price</p>
+<p>E20 ethanol = Total fuel × 20%</p>
+<p>Saving = Higher cost − Lower cost</p>
+</div>
+
+<p style="font-size:12px">Note: These are mathematical estimates, not live fuel prices. E20 compatibility should be checked in the vehicle manufacturer's guidance.</p>
+
+</section>
+<!-- SMART FUEL TOOLS END -->
 <nav>
 <a href="#home">🏠 Home</a>
 <a href="#fuel">⛽ Fuel Data</a>
@@ -757,6 +840,71 @@ function extraE20(){
 
  document.getElementById('extraE20Result').innerText=
  "Ethanol (20%): "+(l*.2).toFixed(2)+" L | Petrol (80%): "+(l*.8).toFixed(2)+" L";
+}
+</script>
+<script>
+function topTrip(){
+ const d=Number(document.getElementById('topDistance').value);
+ const m=Number(document.getElementById('topMileage').value);
+ const p=Number(document.getElementById('topPrice').value);
+ const out=document.getElementById('topTripResult');
+
+ if(d<=0||m<=0||p<=0){
+  out.innerText='Please enter all values greater than zero.';
+  return;
+ }
+
+ out.innerHTML='Fuel required: '+(d/m).toFixed(2)+' litres<br>'+
+ 'Estimated trip cost: ₹'+(d/m*p).toFixed(2);
+}
+
+function topWhatIf(){
+ const a=Number(document.getElementById('topOld').value);
+ const b=Number(document.getElementById('topNew').value);
+ const l=Number(document.getElementById('topLitres').value);
+ const out=document.getElementById('topWhatResult');
+
+ if(a<=0||b<=0||l<=0){
+  out.innerText='Please enter all values greater than zero.';
+  return;
+ }
+
+ const diff=(b-a)*l;
+ out.innerHTML='Old total: ₹'+(a*l).toFixed(2)+'<br>'+
+ 'New total: ₹'+(b*l).toFixed(2)+'<br>'+
+ 'Expense change: ₹'+Math.abs(diff).toFixed(2)+'<br>'+
+ (diff>0?'Your expense increases.':
+ diff<0?'Your expense decreases.':'No change in expense.');
+}
+
+function topE20Calc(){
+ const v=Number(document.getElementById('topE20').value);
+ const out=document.getElementById('topE20Result');
+
+ if(v<=0){
+  out.innerText='Please enter a quantity greater than zero.';
+  return;
+ }
+
+ out.innerHTML='Ethanol (20%): '+(v*.2).toFixed(2)+' litres<br>'+
+ 'Petrol (80%): '+(v*.8).toFixed(2)+' litres';
+}
+
+function topSavings(){
+ const a=Number(document.getElementById('topCostA').value);
+ const b=Number(document.getElementById('topCostB').value);
+ const out=document.getElementById('topSavingsResult');
+
+ if(a<=0||b<=0){
+  out.innerText='Please enter both costs greater than zero.';
+  return;
+ }
+
+ out.innerHTML='Option A: ₹'+a.toFixed(2)+'<br>'+
+ 'Option B: ₹'+b.toFixed(2)+'<br>'+
+ (a===b?'Both options cost the same.':
+ 'Estimated saving by choosing the cheaper option: ₹'+
+ Math.abs(a-b).toFixed(2));
 }
 </script>
 </body>
